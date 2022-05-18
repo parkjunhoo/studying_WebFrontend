@@ -2,43 +2,551 @@
 <html lang="en">
 
 <head>
-    <title>타이틀</title>
-    <!-- css리셋 -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/styles.css">
+    <title>인스타그램 UI 카피해보기</title>
 </head>
 
 <body>
-    <h1 class="boldText">h1</h1>
-    <h2>h2</h2>
-    <div>
-        <p>p1</p>
-        <p class="boldText">p2</p>
-        <p>p3</p>
-    </div>
-    <div style="width:100%; height:20px; background-color:black;"></div>
+    <header style="position:fixed;">
+        <div id="headerBar">
+            <div style="height:36px;" class="barContainer"><img src="src/img/logo.png" alt="Instagram"></div>
+            <div style="justify-content:flex-end;" class="barContainer fadeSmallScreen">
+                <div style="margin-right:10px; display:flex; align-items: center;">
+                    <input onclick="click" id="searchBar" placeholder="검색"
+                        style="width: 236px; height: 25px; padding:7px 25px; border:0; border-radius:5px; background:#efefef;"
+                        type="text">
+                    <svg id="searchIcon" style="position:absolute; margin-left:4px;" aria-label="검색" class="_8-yf5 "
+                        color="#8e8e8e" fill="#8e8e8e" height="16" role="img" viewBox="0 0 24 24" width="16">
+                        <path d="M19 10.5A8.5 8.5 0 1110.5 2a8.5 8.5 0 018.5 8.5z" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" x1="16.511" x2="22" y1="16.511" y2="22"></line>
+                    </svg>
+                </div>
+            </div>
+            <div style="padding-left:50px;" class="barContainer">
+                <svg aria-label="홈" class="headerButton" color="#262626" fill="#262626" height="24" role="img"
+                    viewBox="0 0 24 24" width="24">
+                    <path
+                        d="M22 23h-6.001a1 1 0 01-1-1v-5.455a2.997 2.997 0 10-5.993 0V22a1 1 0 01-1 1H2a1 1 0 01-1-1V11.543a1.002 1.002 0 01.31-.724l10-9.543a1.001 1.001 0 011.38 0l10 9.543a1.002 1.002 0 01.31.724V22a1 1 0 01-1 1z">
+                    </path>
+                </svg>
+                <svg aria-label="Direct" class="headerButton" color="#262626" fill="#262626" height="24" role="img"
+                    viewBox="0 0 24 24" width="24">
+                    <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2" x1="22" x2="9.218"
+                        y1="3" y2="10.083"></line>
+                    <polygon fill="none" points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+                        stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
+                </svg>
+                <svg aria-label="새로운 게시물" class="headerButton" color="#262626" fill="#262626" height="24" role="img"
+                    viewBox="0 0 24 24" width="24">
+                    <path
+                        d="M2 12v3.45c0 2.849.698 4.005 1.606 4.944.94.909 2.098 1.608 4.946 1.608h6.896c2.848 0 4.006-.7 4.946-1.608C21.302 19.455 22 18.3 22 15.45V8.552c0-2.849-.698-4.006-1.606-4.945C19.454 2.7 18.296 2 15.448 2H8.552c-2.848 0-4.006.699-4.946 1.607C2.698 4.547 2 5.703 2 8.552z"
+                        fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2"></path>
+                    <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" x1="6.545" x2="17.455" y1="12.001" y2="12.001"></line>
+                    <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" x1="12.003" x2="12.003" y1="6.545" y2="17.455"></line>
+                </svg>
+                <svg aria-label="사람 찾기" class="headerButton" color="#262626" fill="#262626" height="24" role="img"
+                    viewBox="0 0 24 24" width="24">
+                    <polygon fill="none" points="13.941 13.953 7.581 16.424 10.06 10.056 16.42 7.585 13.941 13.953"
+                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon>
+                    <polygon fill-rule="evenodd" points="10.06 10.056 13.949 13.945 7.581 16.424 10.06 10.056">
+                    </polygon>
+                    <circle cx="12.001" cy="12.005" fill="none" r="10.5" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2"></circle>
+                </svg>
+                <svg aria-label="활동 피드" class="headerButton" color="#262626" fill="#262626" height="24" role="img"
+                    viewBox="0 0 24 24" width="24">
+                    <path
+                        d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z">
+                    </path>
+                </svg>
+                <img style="border-radius:50%;" class="headerButton" height="24" width="24" alt="parkjunwho님의 프로필 사진"
+                    src="./src/img/profile.jpg">
+            </div>
+        </div>
+    </header>
+    <section>
+        <article>
+            <div id="storyListContainer">
+                <ul id="storyList">
+                    <li>
+                        <div style="border:2px solid rgb(253,33,128); border-radius:50%; width:60px; height:60px;"
+                            id="storyContainer">
+                            <img style="margin:auto; border-radius:50%; width:56px; height:56px"
+                                src="./src/img/profile.jpg" alt="">
+                        </div>
+                        <p>parkjunwho</p>
+                    </li>
+                    <li>
+                        <div style="border:2px solid rgb(253,33,128); border-radius:50%; width:60px; height:60px;"
+                            id="storyContainer">
+                            <img style="margin:auto; border-radius:50%; width:56px; height:56px"
+                                src="https://cdn.pixabay.com/photo/2022/04/30/14/04/woman-7165664_960_720.jpg" alt="">
+                        </div>
+                        <p>waikk</p>
+                    </li>
+                    <li>
+                        <div style="border:2px solid rgb(253,33,128); border-radius:50%; width:60px; height:60px;"
+                            id="storyContainer">
+                            <img style="margin:auto; border-radius:50%; width:56px; height:56px"
+                                src="https://cdn.pixabay.com/photo/2022/04/29/00/27/puppy-7162203_960_720.jpg" alt="">
+                        </div>
+                        <p>jjc_023</p>
+                    </li>
+                    <li>
+                </ul>
+            </div>
+            <ul>
+                <li>
+                    <div id="postListContainer">
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center; padding:4px 4px 4px 6px;">
+                                <div style="border:2px solid rgb(253,33,128); border-radius:50%; width:37px; height:37px;"
+                                    id="storyContainer">
+                                    <img style="margin:auto; border-radius:50%; width:32px; height:32px"
+                                        src="./src/img/profile.jpg" alt="">
+                                </div>
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        parkjunwho</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        용인시 양지면</p>
+                                </div>
+                            </div>
+                            <p style="padding:8px; color:#0096F5; font-size:12px; font-weight:700;"><svg
+                                    aria-label="옵션 더 보기" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                    role="img" viewBox="0 0 24 24" width="24">
+                                    <circle cx="12" cy="12" r="1.5"></circle>
+                                    <circle cx="6" cy="12" r="1.5"></circle>
+                                    <circle cx="18" cy="12" r="1.5"></circle>
+                                </svg></p>
+                        </div>
+                        <div>
+                            <img src="./src/img/postimg.jpg" style="height:614px; width:614px;" alt="">
+                            <div style="display:flex; justify-content: space-between; padding:6px 16px 8px">
+                                <div>
+                                    <svg style="padding:8px;" aria-label="좋아요" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <path
+                                            d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z">
+                                        </path>
+                                    </svg>
+                                    <svg style="padding:8px;" aria-label="댓글 달기" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none"
+                                            stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                                    </svg>
+                                    <svg style="padding:8px;" aria-label="게시물 공유" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                            x1="22" x2="9.218" y1="3" y2="10.083"></line>
+                                        <polygon fill="none"
+                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+                                            stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
+                                    </svg>
+                                </div>
+                                <svg style="padding:8px;" aria-label="저장" class="_8-yf5 " color="#262626" fill="#262626"
+                                    height="24" role="img" viewBox="0 0 24 24" width="24">
+                                    <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
+                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <img style="border-radius:50%; margin-right:5px;" height="20" width="20"
+                                    alt="parkjunwho님의 프로필 사진" src="./src/img/profile.jpg">
+                                <p style="font-size:14px; color:#262626;">dg4o__님 <span style="font-weight:700;">여러
+                                        명</span>이 좋아합니다</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:14px; color:#262626;"><span
+                                        style="font-weight:700; margin-right:2px;">dg4o__</span>블리치드코랄 개이쁘네요 조던 ㄷㄷ👍</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:14px; color:#8E8E8E;">댓글 1개 더 보기</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:9px; color:#8E8E8E;">22시간 전</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:6px 16px; display:flex; align-items: center; justify-content: space-between; height:36px; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                            <div style="display:flex;align-items: center; ">
+                                <svg aria-label="이모티콘" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                    role="img" viewBox="0 0 24 24" width="24">
+                                    <path
+                                        d="M15.83 10.997a1.167 1.167 0 101.167 1.167 1.167 1.167 0 00-1.167-1.167zm-6.5 1.167a1.167 1.167 0 10-1.166 1.167 1.167 1.167 0 001.166-1.167zm5.163 3.24a3.406 3.406 0 01-4.982.007 1 1 0 10-1.557 1.256 5.397 5.397 0 008.09 0 1 1 0 00-1.55-1.263zM12 .503a11.5 11.5 0 1011.5 11.5A11.513 11.513 0 0012 .503zm0 21a9.5 9.5 0 119.5-9.5 9.51 9.51 0 01-9.5 9.5z">
+                                    </path>
+                                </svg>
+                                <div style="margin-right:10px; display:flex; align-items: center;">
+                                    <input onclick="click" id="searchBar" placeholder="댓글 달기..."
+                                        style="width: 236px; height: 25px; padding:7px 25px; border:0; border-radius:5px;"
+                                        type="text">
+                                </div>
+                            </div>
+                            <p style="font-size:14px; font-weight:700; color:rgba(0,149,246,0.5);" >게시</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div id="postListContainer">
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center; padding:4px 4px 4px 6px;">
+                                <div style="border:2px solid rgb(253,33,128); border-radius:50%; width:37px; height:37px;"
+                                    id="storyContainer">
+                                    <img style="margin:auto; border-radius:50%; width:32px; height:32px"
+                                        src="https://cdn.pixabay.com/photo/2016/11/23/01/15/tiger-1851653_960_720.jpg" alt="">
+                                </div>
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        dg4o__</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        내 집에서</p>
+                                </div>
+                            </div>
+                            <p style="padding:8px; color:#0096F5; font-size:12px; font-weight:700;"><svg
+                                    aria-label="옵션 더 보기" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                    role="img" viewBox="0 0 24 24" width="24">
+                                    <circle cx="12" cy="12" r="1.5"></circle>
+                                    <circle cx="6" cy="12" r="1.5"></circle>
+                                    <circle cx="18" cy="12" r="1.5"></circle>
+                                </svg></p>
+                        </div>
+                        <div>
+                            <img src="https://cdn.pixabay.com/photo/2016/11/23/01/15/tiger-1851653_960_720.jpg" style="height:614px; width:614px;" alt="">
+                            <div style="display:flex; justify-content: space-between; padding:6px 16px 8px">
+                                <div>
+                                    <svg style="padding:8px;" aria-label="좋아요" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <path
+                                            d="M16.792 3.904A4.989 4.989 0 0121.5 9.122c0 3.072-2.652 4.959-5.197 7.222-2.512 2.243-3.865 3.469-4.303 3.752-.477-.309-2.143-1.823-4.303-3.752C5.141 14.072 2.5 12.167 2.5 9.122a4.989 4.989 0 014.708-5.218 4.21 4.21 0 013.675 1.941c.84 1.175.98 1.763 1.12 1.763s.278-.588 1.11-1.766a4.17 4.17 0 013.679-1.938m0-2a6.04 6.04 0 00-4.797 2.127 6.052 6.052 0 00-4.787-2.127A6.985 6.985 0 00.5 9.122c0 3.61 2.55 5.827 5.015 7.97.283.246.569.494.853.747l1.027.918a44.998 44.998 0 003.518 3.018 2 2 0 002.174 0 45.263 45.263 0 003.626-3.115l.922-.824c.293-.26.59-.519.885-.774 2.334-2.025 4.98-4.32 4.98-7.94a6.985 6.985 0 00-6.708-7.218z">
+                                        </path>
+                                    </svg>
+                                    <svg style="padding:8px;" aria-label="댓글 달기" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <path d="M20.656 17.008a9.993 9.993 0 10-3.59 3.615L22 22z" fill="none"
+                                            stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                                    </svg>
+                                    <svg style="padding:8px;" aria-label="게시물 공유" class="_8-yf5 " color="#262626"
+                                        fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24">
+                                        <line fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                            x1="22" x2="9.218" y1="3" y2="10.083"></line>
+                                        <polygon fill="none"
+                                            points="11.698 20.334 22 3.001 2 3.001 9.218 10.084 11.698 20.334"
+                                            stroke="currentColor" stroke-linejoin="round" stroke-width="2"></polygon>
+                                    </svg>
+                                </div>
+                                <svg style="padding:8px;" aria-label="저장" class="_8-yf5 " color="#262626" fill="#262626"
+                                    height="24" role="img" viewBox="0 0 24 24" width="24">
+                                    <polygon fill="none" points="20 21 12 13.44 4 21 4 3 20 3 20 21"
+                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"></polygon>
+                                </svg>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <img style="border-radius:50%; margin-right:5px;" height="20" width="20"
+                                    alt="parkjunwho님의 프로필 사진" src="./src/img/profile.jpg">
+                                <p style="font-size:14px; color:#262626;">deryf_님 <span style="font-weight:700;">여러
+                                        명</span>이 좋아합니다</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:14px; color:#262626;"><span
+                                        style="font-weight:700; margin-right:2px;">dg4o__</span>집에서 호랑이랑 한컷~</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:14px; color:#8E8E8E;">댓글 2개 더 보기</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; padding:0 16px; margin-bottom:8px;">
+                            <div style="display: flex;">
+                                <p style="font-size:9px; color:#8E8E8E;">5일전</p>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:6px 16px; display:flex; align-items: center; justify-content: space-between; height:36px; border-top: 1px solid rgba(0, 0, 0, 0.1);">
+                            <div style="display:flex;align-items: center; ">
+                                <svg aria-label="이모티콘" class="_8-yf5 " color="#262626" fill="#262626" height="24"
+                                    role="img" viewBox="0 0 24 24" width="24">
+                                    <path
+                                        d="M15.83 10.997a1.167 1.167 0 101.167 1.167 1.167 1.167 0 00-1.167-1.167zm-6.5 1.167a1.167 1.167 0 10-1.166 1.167 1.167 1.167 0 001.166-1.167zm5.163 3.24a3.406 3.406 0 01-4.982.007 1 1 0 10-1.557 1.256 5.397 5.397 0 008.09 0 1 1 0 00-1.55-1.263zM12 .503a11.5 11.5 0 1011.5 11.5A11.513 11.513 0 0012 .503zm0 21a9.5 9.5 0 119.5-9.5 9.51 9.51 0 01-9.5 9.5z">
+                                    </path>
+                                </svg>
+                                <div style="margin-right:10px; display:flex; align-items: center;">
+                                    <input onclick="click" id="searchBar" placeholder="댓글 달기..."
+                                        style="width: 236px; height: 25px; padding:7px 25px; border:0; border-radius:5px;"
+                                        type="text">
+                                </div>
+                            </div>
+                            <p style="font-size:14px; font-weight:700; color:rgba(0,149,246,0.5);" >게시</p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </article>
+        <aside class="fadeSmallScreen">
+            <div id="asideContainer">
+                <div
+                    style="display:flex; justify-content: space-between; align-items: center; width: 100%; height:56px;">
+                    <div style="display:flex; align-items: center;">
+                        <img style="border-radius:50%; width:56px; height:56px" src="./src/img/profile.jpg" alt="">
+                        <p style="margin-left:15px; font-size:14px; font-weight:700; color:rgba(38,38,38,.86);">
+                            parkjunwho</p>
+                    </div>
+                    <a style="font-size:12px; font-weight:700; text-decoration:none; color:#0095f6">전환</a>
+                </div>
+                <div style="display:flex; width:293px; justify-content: space-between; margin-top:12px">
+                    <p style="padding:4px 0; color:#8E8E8E; font-size:14px; font-weight:800;">회원님을 위한 추천</p>
+                    <p style="padding:4px 0; color:#262626; font-size:12px; font-weight:700;">모두보기</p>
+                </div>
+                <ul>
+                    <li>
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; width:293px; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center;">
+                                <img style="border-radius:50%; padding:10px;" height="32" width="32"
+                                    alt="parkjunwho님의 프로필 사진" src="https://cdn.pixabay.com/photo/2021/05/24/19/34/girl-6280358__340.jpg">
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        dsdgiret25</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        Instargram 신규 가입</p>
+                                </div>
+                            </div>
+                            <p style="color:#0096F5; font-size:12px; font-weight:700;">팔로우</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; width:293px; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center;">
+                                <img style="border-radius:50%; padding:10px;" height="32" width="32"
+                                    alt="parkjunwho님의 프로필 사진" src="https://cdn.pixabay.com/photo/2017/04/01/21/06/portrait-2194457__340.jpg">
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        dsituei24</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        Instargram 신규 가입</p>
+                                </div>
+                            </div>
+                            <p style="color:#0096F5; font-size:12px; font-weight:700;">팔로우</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; width:293px; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center;">
+                                <img style="border-radius:50%; padding:10px;" height="32" width="32"
+                                    alt="parkjunwho님의 프로필 사진" src="https://cdn.pixabay.com/photo/2017/06/15/11/40/beautiful-2405131__340.jpg">
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        qnffkerk2</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        Instargram 신규 가입</p>
+                                </div>
+                            </div>
+                            <p style="color:#0096F5; font-size:12px; font-weight:700;">팔로우</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; width:293px; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center;">
+                                <img style="border-radius:50%; padding:10px;" height="32" width="32"
+                                    alt="parkjunwho님의 프로필 사진" src="https://cdn.pixabay.com/photo/2015/08/05/04/02/people-875597__340.jpg">
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        supersuper23</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        sdf3565님 외 4명이 팔로우합니다</p>
+                                </div>
+                            </div>
+                            <p style="color:#0096F5; font-size:12px; font-weight:700;">팔로우</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div
+                            style="display:flex; justify-content: space-between; align-items: center; width:293px; height:48px; margin:5px 0px;">
+                            <div style="display:flex; align-items: center;">
+                                <img style="border-radius:50%; padding:10px;" height="32" width="32"
+                                    alt="parkjunwho님의 프로필 사진" src="https://cdn.pixabay.com/photo/2015/09/13/03/41/man-937665__340.jpg">
+                                <div style="display:flex; flex-direction: column;">
+                                    <p style="color:rgba(38,38,38,0.7); font-size:14px; font-weight: 700; margin:1px;">
+                                        dsdgiret25</p>
+                                    <p style="color:#8e8e8e; font-size:12px; margin-left:1px; margin-top:4px;">
+                                        meiyk385님 외 94명이 팔로우합니다</p>
+                                </div>
+                            </div>
+                            <p style="color:#0096F5; font-size:12px; font-weight:700;">팔로우</p>
+                        </div>
+                    </li>
+                </ul>
+                <div>
+                    <p style="color:#c7c7c7; font-size:12px;">소개 · 도움말 · 홍보 센터 · API · 채용 정보 · </p>
+                    <p style="color:#c7c7c7; font-size:12px;">개인정보처리방침 · 약관 · 위치 · 인기 계정 · 해시태그언어</p>
+                    <br>
+                    <p style="color:#c7c7c7; font-size:12px;">© 2022 INSTAGRAM FROM META</p>
+                </div>
+            </div>
+        </aside>
+    </section>
+
 </body>
 
 </html>
 
 <style>
-    div{
-        margin-top:5px;
-    }
-    h1 {
-        color: green;
-        font-size: 5rem
+    body {
+        background-color: #fafafa;
     }
 
-    h2 {
-        color: blue;
-        font-size: 4rem
+    header {
+        z-index: 3;
+        top: 0;
+        display: flex;
+        background-color: white;
+        height: 60px;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    div p {
-        color: red;
+    #headerBar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 935px;
     }
 
-    .boldText {
-        font-weight: bold;
+    .barContainer {
+        display: flex;
+        width: calc(100%/3);
+        align-items: flex-end;
+    }
+
+    .headerButton {
+        margin: auto;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    input:focus+#searchIcon {
+        display: none;
+    }
+
+    section {
+        position: relative;
+        top: 61px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 935px;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    #storyListContainer {
+        flex: 1;
+        align-items: center;
+        margin-bottom: 24px;
+        width: 614px;
+        height: 119px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        background-color: white;
+    }
+
+    #postListContainer {
+        flex: 1;
+        align-items: center;
+        margin-bottom: 24px;
+        width: 614px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        background-color: white;
+    }
+
+    #storyList {
+        padding: 16px 10px;
+        display: flex;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    #storyList>li {
+        margin: 2px;
+    }
+
+    #storyList>li>p {
+        margin-top: 3px;
+    }
+
+    #storyContainer {
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        margin: 0 12px;
+    }
+
+    aside {
+        top: 95px;
+        position: fixed;
+        display: flex;
+        padding: 20px 0px 0px 30px;
+        align-self: flex-end;
+    }
+
+    #asideContainer {
+        width: 293px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media(max-width:935px) {
+        .fadeSmallScreen {
+            display: none;
+        }
+    }
+
+    @media(max-width:1000px) {
+        aside {
+            display: none;
+        }
+
+        section {
+            flex-direction: row;
+        }
+    }
+
+    @media(max-height:400px) {
+        aside {
+            display: none;
+        }
     }
 </style>
